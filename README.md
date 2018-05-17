@@ -1,3 +1,5 @@
-# ZipCracker
-Python Zip Cracker
-Usage: python zipcracker.py -f <file> -w <wordlist>
+# ZIPCracker
+Python ZIPCracker
+
+Usage: python ZIPCracker.py -f <file> -w <wordlist>
+Example: python ZIPCracker.py -f secret.zip -w /usr/share/wordlists/rockyou.txt
