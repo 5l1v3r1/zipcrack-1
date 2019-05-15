@@ -1,19 +1,19 @@
 import sys
 import zipfile
-import optparse
+import argparse
 from threading import Thread
 
 
 def main():
-    parser = optparse.OptionParser('usage: zipcracker.py ' + '-f <zipfile> -w <wordlist>')
-    parser.add_option('-f', dest='zipf',type='string',help='specify zip file')
-    parser.add_option('-w', dest='wordf',type='string',help='specify wordlist file')
-    (options,args) = parser.parse_args()
-    if (options.zipf == None) | (options.wordf == None):
+    parser = argparse.ArgumentParser('usage: zipcracker.py ' + '-f <zipfile> -w <wordlist>')
+    parser.add_argument('-f','--file',required=True,dest='zipf',help='specify zip file')
+    parser.add_argument('-w','--wordlist',required=True,dest='wordf',help='specify wordlist file')
+    args = parser.parse_args()
+    if (args.zipf == None) | (args.wordf == None):
         print(parser.usage)
     else:
-        zipf = options.zipf
-        wordf = options.wordf
+        zipf = args.zipf
+        wordf = args.wordf
     zipf = zipfile.ZipFile(zipf)
     wordf = open(wordf)
     for line in wordf.readlines():
@@ -26,6 +26,8 @@ def extractFile(zipf, password):
         zipf.extractall(pwd=password)
         print('\n[+] Brute Force Successful: ' + password)
         return password
+    except KeyboardInterrupt:
+        print('\n[-] CTRL-C Terminated.')
     except:
         space = len(password)
         space = ' ' * space
