@@ -26,6 +26,7 @@ def extractFile(zipf, password):
         zipf.extractall(pwd=password)
         print('\n[+] Brute Force Successful: ' + password)
         return password
+        exit
     except KeyboardInterrupt:
         print('\n[-] CTRL-C Terminated.')
     except:
